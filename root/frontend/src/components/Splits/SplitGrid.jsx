@@ -3,13 +3,13 @@ import React, { useContext, useEffect } from "react";
 
 // Components
 import AddSplitBtn from "./AddSplitBtn";
-import NewSplit from "./NewSplitModal.js";
+import NewSplit from "./NewSplitModal.jsx";
 
 // Components
 import { useNavigate } from "react-router-dom";
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext.js";
+import { GlobalContext } from "../../context/GlobalContext";
 
 // css
 import "./SplitGrid.css";

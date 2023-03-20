@@ -3,14 +3,11 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// Css
-import "./Login.css";
-
 // Context
 import { GlobalContext } from "../../context/GlobalContext";
 
-const API_URL = "https://workouttracker-server.onrender.com";
-// const API_URL = "http://localhost:8000";
+// const API_URL = "https://workouttracker-server.onrender.com";
+const API_URL = "http://localhost:8000";
 
 function Login() {
   // States
@@ -76,7 +73,7 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div class="flex">
       <form onSubmit={(e) => handleSubmit(e)} className="form-validate">
         <p className="title">{form === "login" ? `Login` : `Signup`}</p>
         <div className="buttons-container">

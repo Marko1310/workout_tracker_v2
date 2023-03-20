@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 // Components
-import NewWorkoutModal from "./NewWorkoutModal.js";
-import AddWorkoutBtn from "./AddWorkoutBtn.js";
+import NewWorkoutModal from "./NewWorkoutModal.jsx";
+import AddWorkoutBtn from "./AddWorkoutBtn.jsx";
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext.js";
+import { GlobalContext } from "../../context/GlobalContext";
 
 // css
 import "./WorkoutGrid.css";
