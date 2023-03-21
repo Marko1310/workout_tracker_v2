@@ -188,8 +188,30 @@ function Login() {
           Workout Tracker App
         </p>
       </div>
-      <p className="text-4xl font-extralight text-gray-700">Sign in</p>
-      <form className="bg-white px-8 pt-6 pb-8 mb-4 w-full">
+      <p className="text-4xl font-light text-gray-700">
+        {form === "login" ? `Login` : `Signup`}
+      </p>
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="bg-white px-8 pt-6 pb-8 mb-4 w-full"
+      >
+        {form === "signup" && (
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              for="name"
+            >
+              Name
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-14 focus: border-grey-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
+              id="email"
+              type="text"
+              placeholder="Name"
+            />
+          </div>
+        )}
+
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -198,7 +220,7 @@ function Login() {
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-14 focus: border-grey-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition-all delay-50"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-14 focus: border-grey-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
             id="email"
             type="text"
             placeholder="Email adress"
@@ -212,7 +234,7 @@ function Login() {
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline h-14 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition-all delay-50"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline h-14 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
             id="password"
             type="password"
             placeholder="******************"
@@ -221,18 +243,27 @@ function Login() {
             Please choose a password.
           </p>
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-          >
-            Sign In
-          </button>
+
+        <button
+          className="bg-gray-200 hover:bg-gray-700 hover:text-white w-full text-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease-out duration-500"
+          type="button"
+        >
+          {form === "login" ? `Login` : `Signup`}
+        </button>
+        <div className="flex justify-end">
           <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#"
+            className=" text-right font-bold text-sm text-gray-500 hover:text-gray-800 cursor-pointer transition ease-out duration-500 mt-4"
+            onClick={(e) => {
+              setForm((prevForm) =>
+                prevForm === "signup" ? "login" : "signup"
+              );
+              setErrors({});
+              e.preventDefault();
+            }}
           >
-            Forgot Password?
+            {form === "login"
+              ? "Already have an account? Login"
+              : "Dont't have an account? Sign up"}
           </a>
         </div>
       </form>
