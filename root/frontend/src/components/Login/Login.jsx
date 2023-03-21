@@ -208,10 +208,19 @@ function Login() {
               id="email"
               type="text"
               placeholder="Name"
+              value={input.name}
+              onChange={(e) =>
+                setInput((prevInput) => ({
+                  ...prevInput,
+                  name: e.target.value,
+                }))
+              }
             />
+            {errors.name && form === "signup" && (
+              <p className="text-red-500 text-xs italic">{errors.name}</p>
+            )}
           </div>
         )}
-
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -224,7 +233,17 @@ function Login() {
             id="email"
             type="text"
             placeholder="Email adress"
+            value={input.email}
+            onChange={(e) =>
+              setInput((prevInput) => ({
+                ...prevInput,
+                email: e.target.value,
+              }))
+            }
           />
+          {errors.email && form === "signup" && (
+            <p className="text-red-500 text-xs italic">{errors.email}</p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -238,15 +257,25 @@ function Login() {
             id="password"
             type="password"
             placeholder="******************"
+            value={input.password}
+            onChange={(e) =>
+              setInput((prevInput) => ({
+                ...prevInput,
+                password: e.target.value,
+              }))
+            }
           />
-          <p className="text-red-500 text-xs italic">
-            Please choose a password.
-          </p>
+          {errors.password && form === "signup" && (
+            <p className="text-red-500 text-xs italic">{errors.password}</p>
+          )}
+          {errors && form === "login" && (
+            <p className="text-red-500 text-xs italic">{errors.error}</p>
+          )}
         </div>
 
         <button
           className="bg-gray-200 hover:bg-gray-700 hover:text-white w-full text-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease-out duration-500"
-          type="button"
+          type="submit"
         >
           {form === "login" ? `Login` : `Signup`}
         </button>
@@ -258,15 +287,23 @@ function Login() {
                 prevForm === "signup" ? "login" : "signup"
               );
               setErrors({});
+              setInput({
+                name: "",
+                email: "",
+                password: "",
+              });
               e.preventDefault();
             }}
           >
-            {form === "login"
+            {form === "signup"
               ? "Already have an account? Login"
               : "Dont't have an account? Sign up"}
           </a>
         </div>
       </form>
+      {errors && form === "signup" && (
+        <p className="text-red-500 text-xs italic">{errors.existing}</p>
+      )}
     </div>
   );
 }
