@@ -56,8 +56,8 @@ router.post("/register", async (req, res) => {
     res.cookie("access-token", token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      // secure: true,
+      // sameSite: "none",
       // domain: "onrender.com",
     });
 
@@ -105,9 +105,9 @@ router.post("/login", async (req, res) => {
 
     res.cookie("access-token", token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
+      // httpOnly: true,
       secure: true,
-      sameSite: "none",
+      // sameSite: "none",
       // domain: "onrender.com",
     });
 

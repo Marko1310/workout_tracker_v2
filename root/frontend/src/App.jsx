@@ -21,7 +21,7 @@ function App() {
     <Router>
       <div className="App">
         <div className="content">
-          {/* {<Navigation />} */}
+          {<Navigation />}
           {loading ? (
             <div className="loading">
               <ThreeDots

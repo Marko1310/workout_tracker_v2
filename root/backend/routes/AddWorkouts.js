@@ -204,48 +204,48 @@ router.post("/split/workout/exercise/track", requiresAuth, async (req, res) => {
 // @route   POST /api/split/workout/exercise/track
 // @desc    Update workout day and create new track data for new workout day
 // @access  Private
-router.post(
-  "/split/workout/exercise/track/new",
-  requiresAuth,
-  async (req, res) => {
-    try {
-      const date = new Date();
-      user_id = req.user.id;
-      const { workout_id } = req.body;
+// router.post(
+//   "/split/workout/exercise/track/new",
+//   requiresAuth,
+//   async (req, res) => {
+//     try {
+//       const date = new Date();
+//       user_id = req.user.id;
+//       const { workout_id } = req.body;
 
-      const isValidWorkoutId = await databaseCheck.checkWorkoutId(
-        workout_id,
-        user_id
-      );
-      if (isValidWorkoutId === 0) {
-        return res.status(400).send("Unathorized");
-      }
+//       const isValidWorkoutId = await databaseCheck.checkWorkoutId(
+//         workout_id,
+//         user_id
+//       );
+//       if (isValidWorkoutId === 0) {
+//         return res.status(400).send("Unathorized");
+//       }
 
-      const currentWorkoutDay = await pool.query(
-        "SELECT day FROM workouts WHERE workout_id = $1",
-        [workout_id]
-      );
+//       const currentWorkoutDay = await pool.query(
+//         "SELECT day FROM workouts WHERE workout_id = $1",
+//         [workout_id]
+//       );
 
-      const newWorkoutDay = await pool.query(
-        "UPDATE workouts SET day = day + 1 WHERE workout_id = $1 RETURNING *",
-        [workout_id]
-      );
+//       const newWorkoutDay = await pool.query(
+//         "UPDATE workouts SET day = day + 1 WHERE workout_id = $1 RETURNING *",
+//         [workout_id]
+//       );
 
-      const newTrackData = await pool.query(
-        "INSERT INTO track (set, reps, weight, date, user_id, exercise_id, workout_day, workout_id) SELECT set, 0, 0, $1, user_id, exercise_id, $2, workout_id FROM track WHERE workout_id = $3 AND workout_day = $4 GROUP BY set, reps, weight, date, user_id, exercise_id, workout_day, workout_id RETURNING *",
-        [
-          date,
-          newWorkoutDay.rows[0].day,
-          workout_id,
-          currentWorkoutDay.rows[0].day,
-        ]
-      );
-      res.json(newTrackData.rows);
-    } catch (err) {
-      return res.status(500).send(err.message);
-    }
-  }
-);
+//       const newTrackData = await pool.query(
+//         "INSERT INTO track (set, reps, weight, date, user_id, exercise_id, workout_day, workout_id) SELECT set, 0, 0, $1, user_id, exercise_id, $2, workout_id FROM track WHERE workout_id = $3 AND workout_day = $4 GROUP BY set, reps, weight, date, user_id, exercise_id, workout_day, workout_id RETURNING *",
+//         [
+//           date,
+//           newWorkoutDay.rows[0].day,
+//           workout_id,
+//           currentWorkoutDay.rows[0].day,
+//         ]
+//       );
+//       res.json(newTrackData.rows);
+//     } catch (err) {
+//       return res.status(500).send(err.message);
+//     }
+//   }
+// );
 
 ///////////////////////////////////////
 
