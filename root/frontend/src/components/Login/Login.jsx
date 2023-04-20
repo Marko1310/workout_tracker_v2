@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { images } from './images';
@@ -22,6 +22,7 @@ function Login() {
   const { setLoading } = useContext(GlobalContext);
   const { getCurrentUser } = useContext(GlobalContext);
   const { errors, setErrors } = useContext(GlobalContext);
+  const [backgroundImage, setBackgroundImage] = useState('');
 
   // Routing
   const navigate = useNavigate();
@@ -31,6 +32,10 @@ function Login() {
       navigate('/dashboard');
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
+  }, []);
 
   let timeout;
   const setLoadingTimeout = () => {
@@ -76,7 +81,12 @@ function Login() {
   return (
     <div className="login-container">
       <div className="image-container">
-        <img className="image-login" src="" />
+        <img
+          className="image-login"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+          }}
+        />
       </div>
       <form className="form-container" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-title-container">
@@ -161,141 +171,6 @@ function Login() {
       </form>
     </div>
   );
-
-  // return (
-  //   <div className="grid lg:grid-cols-3 md:grid-cols-3 overflow-hidden h-screen">
-  //     <div className="lg:col-span-2 md:col-span-1 overflow-hidden ">
-  //       <img
-  //         className="relative top-1/2 transform -translate-y-1/2 w-full h-full  object-cover "
-  //         src={images[Math.floor(Math.random() * 7)].img}
-  //       ></img>
-  //     </div>
-  //     <div className="lg:col-span-1 md:col-span-2 flex flex-col pt-10 shadow-md shadow-left h-screen justify-start items-center font-nanum text-gray-600">
-  //       <div className="flex flex-row justify-center items-center gap-6 mb-10">
-  //         <img className="h-12 w-12" src={logo} alt="logo" />
-  //         <p className="inline-block font-bold text-xl text-gray-700">
-  //           Workout Tracker App
-  //         </p>
-  //       </div>
-  //       <p className="text-4xl font-light text-gray-700">
-  //         {form === "login" ? `Login` : `Signup`}
-  //       </p>
-  //       <form
-  //         onSubmit={(e) => handleSubmit(e)}
-  //         className="bg-white px-8 pt-6 pb-8 mb-4 w-full"
-  //       >
-  //         {form === "signup" && (
-  //           <div className="mb-4">
-  //             <label
-  //               className="block text-gray-700 text-sm font-bold mb-2"
-  //               for="name"
-  //             >
-  //               Name
-  //             </label>
-  //             <input
-  //               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-14 focus: border-grey-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
-  //               id="email"
-  //               type="text"
-  //               placeholder="Name"
-  //               value={input.name}
-  //               onChange={(e) =>
-  //                 setInput((prevInput) => ({
-  //                   ...prevInput,
-  //                   name: e.target.value,
-  //                 }))
-  //               }
-  //             />
-  //             {errors.name && form === "signup" && (
-  //               <p className="text-red-500 text-xs italic">{errors.name}</p>
-  //             )}
-  //           </div>
-  //         )}
-  //         <div className="mb-4">
-  //           <label
-  //             className="block text-gray-700 text-sm font-bold mb-2"
-  //             for="email"
-  //           >
-  //             Email
-  //           </label>
-  //           <input
-  //             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-14 focus: border-grey-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
-  //             id="email"
-  //             type="text"
-  //             placeholder="Email adress"
-  //             value={input.email}
-  //             onChange={(e) =>
-  //               setInput((prevInput) => ({
-  //                 ...prevInput,
-  //                 email: e.target.value,
-  //               }))
-  //             }
-  //           />
-  //           {errors.email && form === "signup" && (
-  //             <p className="text-red-500 text-xs italic">{errors.email}</p>
-  //           )}
-  //         </div>
-  //         <div className="mb-6">
-  //           <label
-  //             className="block text-gray-700 text-sm font-bold mb-2"
-  //             for="password"
-  //           >
-  //             Password
-  //           </label>
-  //           <input
-  //             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline h-14 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 hover:border-gray-800 transition ease-out duration-500"
-  //             id="password"
-  //             type="password"
-  //             placeholder="******************"
-  //             value={input.password}
-  //             onChange={(e) =>
-  //               setInput((prevInput) => ({
-  //                 ...prevInput,
-  //                 password: e.target.value,
-  //               }))
-  //             }
-  //           />
-  //           {errors.password && form === "signup" && (
-  //             <p className="text-red-500 text-xs italic">{errors.password}</p>
-  //           )}
-  //           {errors && form === "login" && (
-  //             <p className="text-red-500 text-xs italic">{errors.error}</p>
-  //           )}
-  //         </div>
-
-  //         <button
-  //           className="bg-gray-200 hover:bg-gray-700 hover:text-white w-full text-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease-out duration-500"
-  //           type="submit"
-  //         >
-  //           {form === "login" ? `Login` : `Signup`}
-  //         </button>
-  //         <div className="flex justify-end">
-  //           <a
-  //             className=" text-right font-bold text-sm text-gray-500 hover:text-gray-800 cursor-pointer transition ease-out duration-500 mt-4"
-  //             onClick={(e) => {
-  //               setForm((prevForm) =>
-  //                 prevForm === "signup" ? "login" : "signup"
-  //               );
-  //               setErrors({});
-  //               setInput({
-  //                 name: "",
-  //                 email: "",
-  //                 password: "",
-  //               });
-  //               e.preventDefault();
-  //             }}
-  //           >
-  //             {form === "signup"
-  //               ? "Already have an account? Login"
-  //               : "Dont't have an account? Sign up"}
-  //           </a>
-  //         </div>
-  //       </form>
-  //       {errors && form === "signup" && (
-  //         <p className="text-red-500 text-xs italic">{errors.existing}</p>
-  //       )}
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default Login;
