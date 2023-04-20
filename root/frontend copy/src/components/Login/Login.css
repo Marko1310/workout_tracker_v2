@@ -1,0 +1,156 @@
+.login-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.image-container {
+  padding: 0;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 1.5rem;
+}
+
+.image-login {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.form-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.form-image {
+  height: 45px;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(60, 60, 60);
+}
+
+.form-title {
+  font-size: 30px;
+  font-weight: 200;
+  color: rgb(60, 60, 60);
+  margin-bottom: 2rem;
+}
+
+.login-forms {
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(168, 168, 168);
+  padding-left: 1rem;
+  width: 100%;
+  height: 3.5rem;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.login-forms::placeholder {
+  font-weight: 100;
+}
+
+.login-forms:hover {
+  font-weight: 100;
+  border-color: black;
+  transition: 0.3s ease-in-out;
+}
+
+.login-forms:focus {
+  outline: none;
+  border-width: 1.5px;
+  border-color: black;
+  transition: 0s ease-in-out;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  height: 3rem;
+  font-size: 18px;
+}
+
+.login-button {
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+  height: 3rem;
+  border-radius: 4px;
+  background-color: #bbbcbc;
+  outline: none;
+  border: none;
+  transition: all 0.4s;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.login-button:hover {
+  background-color: #2c2d2d;
+}
+
+.login-footer {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  height: 2rem;
+}
+
+.sign-up {
+  color: #2c2d2d;
+  text-decoration: underline;
+  margin: 0;
+  transition: all 0.4s;
+}
+
+.sign-up:hover {
+  cursor: pointer;
+}
+
+.error {
+  color: #d63012;
+  height: 1rem;
+  margin-bottom: 0.5;
+  margin-top: 0;
+}
+
+@media all and (max-width: 768px) {
+  .login-container {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .image-container {
+    visibility: hidden;
+  }
+
+  .login-container {
+    display: flex;
+  }
+  .form-container {
+    width: 100vw;
+  }
+}

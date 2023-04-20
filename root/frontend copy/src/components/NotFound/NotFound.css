@@ -1,0 +1,20 @@
+.error-container {
+  height: 100%;
+  width: 100vh;
+}
+
+.text-container {
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.backTo {
+  color: #fff;
+  margin-top: 2rem;
+}

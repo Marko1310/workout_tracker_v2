@@ -1,0 +1,97 @@
+.workout-main-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.workout {
+  background-color: white;
+  border-radius: 10px;
+  width: 25rem;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  height: auto;
+  padding-top: 1rem;
+}
+
+.container {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.description-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: var(--clr-grey-8);
+  border-bottom-style: solid;
+}
+
+p {
+  color: black;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.workoutBtn {
+  font-size: 1rem;
+  color: #fff;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-transform: uppercase;
+  width: 90%;
+  height: 2rem;
+  border-radius: 3px;
+  background-color: #38d28f;
+  outline: none;
+  border: none;
+  transition: all 0.4s;
+  margin-bottom: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.add {
+  background-color: rgb(16, 172, 224);
+}
+
+.buttonFinish {
+  font-size: 1rem;
+  color: #fff;
+  padding: 0rem 1rem 0rem 1rem;
+  border-radius: 3px;
+  font-weight: 600;
+  background-color: #38d28f;
+  outline: none;
+  border: none;
+  transition: all 0.4s;
+  font-family: "Montserrat", sans-serif;
+  height: 1.8rem;
+}
+
+.workoutBtn:hover {
+  filter: brightness(1.05);
+}
+
+.buttonFinish:hover {
+  filter: brightness(1.05);
+}

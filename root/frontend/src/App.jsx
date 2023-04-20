@@ -3,6 +3,9 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 
+// css
+import './index.css';
+
 // Components
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
