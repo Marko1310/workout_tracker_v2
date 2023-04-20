@@ -1,18 +1,18 @@
 // React
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
 // Components
-import Navigation from "./components/Navigation/Navigation";
-import Login from "./components/Login/Login";
-import Workout from "./components/Workouts/Workout";
-import SplitGrid from "./components/Splits/SplitGrid";
-import WorkoutGrid from "./components/Workouts/WorkoutGrid";
-import NotFound from "./components/NotFound/NotFound";
+import Navigation from './components/Navigation/Navigation';
+import Login from './components/Login/Login';
+import Workout from './components/Workouts/Workout';
+import SplitGrid from './components/Splits/SplitGrid';
+import WorkoutGrid from './components/Workouts/WorkoutGrid';
+import NotFound from './components/NotFound/NotFound';
 
 // Context
-import { GlobalContext } from "./context/GlobalContext";
+import { GlobalContext } from './context/GlobalContext';
 
 function App() {
   const { loading } = useContext(GlobalContext);
@@ -21,7 +21,7 @@ function App() {
     <Router>
       <div className="App">
         <div className="content">
-          {<Navigation />}
+          {/* {<Navigation />} */}
           {loading ? (
             <div className="loading">
               <ThreeDots
