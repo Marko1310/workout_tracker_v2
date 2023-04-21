@@ -8,12 +8,13 @@
 }
 
 .addLogo {
-  height: 6rem;
-  width: 6rem;
+  height: 5rem;
+  width: 5rem;
   transition: all 0.2s ease-in-out;
   margin-bottom: 0.5rem;
 }
 
 .addLogo:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
+  cursor: pointer;
 }

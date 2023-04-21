@@ -1,5 +1,8 @@
 .newExercise-container {
-  position: absolute;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 25rem;
   z-index: 2;
   background-color: white;
@@ -10,15 +13,9 @@
   justify-content: center;
   flex-direction: column;
   height: auto;
-  margin-right: auto;
-  left: 50%;
-  margin-bottom: 10rem;
-  top: -2rem;
-  margin-left: -12.5rem;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.5s ease, visibility 0s linear 0s;
-  transition: all 0.8s ease;
+  transition: opacity 0.8s ease;
 }
 
 .show {
@@ -47,7 +44,7 @@
   font-size: 18px;
   padding-left: 2rem;
   padding-right: 2rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .button-container {
@@ -66,7 +63,7 @@
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin-top: 1rem;
 }
 

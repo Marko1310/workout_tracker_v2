@@ -1,20 +1,20 @@
 // React
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // Components
-import NewWorkoutModal from "./NewWorkoutModal.jsx";
-import AddWorkoutBtn from "./AddWorkoutBtn.jsx";
+import NewWorkoutModal from './NewWorkoutModal.jsx';
+import AddWorkoutBtn from './AddWorkoutBtn.jsx';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 // css
-import "./WorkoutGrid.css";
+import './WorkoutGrid.css';
 
 // Image
-import logo from "../../images/workout.png";
+import logo from '../../images/workout.png';
 
 const WorkoutGrid = () => {
   const { isModalOpen } = useContext(GlobalContext);
@@ -33,7 +33,7 @@ const WorkoutGrid = () => {
 
   useEffect(() => {
     if (!user && navigate) {
-      navigate("/");
+      navigate('/');
     } else {
       getWorkouts(split_id);
     }
@@ -53,7 +53,7 @@ const WorkoutGrid = () => {
 
   // Delete workout
   const handleDelete = (e, split_id, workout_id) => {
-    if (window.confirm("Are you sure you want to delete this Workout?")) {
+    if (window.confirm('Are you sure you want to delete this Workout?')) {
       deleteWorkout(e, split_id, workout_id);
       setLoading(true);
     }
@@ -63,39 +63,34 @@ const WorkoutGrid = () => {
   return (
     <>
       <div className="workoutGrid-main-container">
-        <div className={`${isModalOpen ? "blurred" : ""}`}>
-          <p className="choose">Choose a Workout</p>
+        <div className={`${isModalOpen ? 'blurred' : ''}`}>
+          <p className="choose-title">Choose a Workout</p>
           <div className="exercise-grid">
             {workouts.map((el) => {
               return (
-                <ul
-                  key={el.workout_id}
-                  onClick={() => changeRoute(el.workout_id)}
-                  className="exercise-list-container"
-                >
+                <ul key={el.workout_id} className="exercise-list-container">
                   <div className="image-and-delete-container-workout">
-                    <img
-                      className="exercise-image"
-                      src={logo}
-                      alt="exercise"
-                    ></img>
-                    <button
-                      onClick={(e) => handleDelete(e, split_id, el.workout_id)}
-                      className="delete-split"
-                    >
+                    <img className="exercise-image" src={logo} alt="exercise"></img>
+                    <p onClick={(e) => handleDelete(e, split_id, el.workout_id)} className="delete-split">
                       Delete
-                    </button>
+                    </p>
                   </div>
 
                   <div className="exercise-card">
                     <li className="exercise-card-title">{el.workout_name}</li>
                     <p>Exercises: </p>
-                    {el.array_agg.map((name) => {
-                      return <li> - {name}</li>;
+                    {el.array_agg.map((name, index) => {
+                      return (
+                        <li>
+                          {' '}
+                          - Exercise {index + 1} : {name}
+                        </li>
+                      );
                     })}
-                    <li>--------------------------------</li>
-                    <li>Date created: {el.date.slice(0, 10)}</li>
                   </div>
+                  <button className="enter-workout" onClick={() => changeRoute(el.workout_id)}>
+                    Choose Workout
+                  </button>
                 </ul>
               );
             })}

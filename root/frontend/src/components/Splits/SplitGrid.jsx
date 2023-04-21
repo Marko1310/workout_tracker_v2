@@ -65,18 +65,17 @@ const WorkoutSplitGrid = () => {
                       </p>
                     </div>
                     <div className="workout-card">
-                      <li className="workout-card-title">{el.split_name}</li>
+                      <li className="workout-card-title">{el.split_name} workout</li>
                       <li className="workout-card-workouts-days">{el.days} day split:</li>
                       {el.array_agg.map((name, index) => {
                         return (
                           <li className="workout-card-workouts">
-                            {' '}
                             - Day {index + 1} : {name} day
                           </li>
                         );
                       })}
                     </div>
-                    <button className="enter-split" onClick={isModalOpen ? null : () => changeRoute(el.split_id)}>
+                    <button className="enter-split" onClick={() => changeRoute(el.split_id)}>
                       Choose Split
                     </button>
                   </ul>
