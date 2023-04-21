@@ -64,7 +64,6 @@
   width: 100%;
   height: 3.5rem;
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .login-forms::placeholder {
@@ -107,7 +106,6 @@
   transition: all 0.4s;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .login-button:hover {
@@ -137,6 +135,7 @@
 
 .error {
   color: #d63012;
+  /* height: 1rem; */
   margin-bottom: 0.5;
   margin-top: 0;
 }

@@ -1,9 +1,9 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
@@ -11,36 +11,36 @@ app.use(
   cors({
     credentials: true,
     origin: [
-      "https://workouttracker-be21.onrender.com",
-      "http://localhost:3000",
-      "http://127.0.0.1:5173",
-      "http://localhost:5173",
+      // "https://workouttracker-be21.onrender.com",
+      // "http://localhost:3000",
+      'http://127.0.0.1:5173',
+      // "http://localhost:5173",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     // origin: "http://127.0.0.1:5173",
-  })
+  }),
   // cors()
 );
 
 // import routes
-const authRoute = require("./routes/Auth");
-const addWorkoutRoute = require("./routes/AddWorkouts");
-const retrieveWorkoutRoute = require("./routes/RetrieveWorkouts");
-const editWorkoutRoute = require("./routes/EditWorkouts");
+const authRoute = require('./routes/Auth');
+const addWorkoutRoute = require('./routes/AddWorkouts');
+const retrieveWorkoutRoute = require('./routes/RetrieveWorkouts');
+const editWorkoutRoute = require('./routes/EditWorkouts');
 
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.use("/api/auth", authRoute);
-app.use("/api/auth", addWorkoutRoute);
-app.use("/api/auth", retrieveWorkoutRoute);
-app.use("/api/auth", editWorkoutRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/auth', addWorkoutRoute);
+app.use('/api/auth', retrieveWorkoutRoute);
+app.use('/api/auth', editWorkoutRoute);
 
-app.get("/", async (req, res) => {
+app.get('/', async (req, res) => {
   try {
-    return res.status(200).json("Hello server");
+    return res.status(200).json('Hello server');
   } catch (err) {
     console.log(err);
   }

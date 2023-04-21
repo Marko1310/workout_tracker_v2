@@ -2,7 +2,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+// images
 import { images } from './images';
+
+// css
 import './Login.css';
 
 // Context
@@ -15,14 +19,20 @@ const API_URL = 'http://localhost:8000';
 import logo from '../../images/workout-icon.jpg';
 
 function Login() {
-  // States
+  // Global context
   const { user } = useContext(GlobalContext);
-  const { input, setInput } = useContext(GlobalContext);
-  const { form, setForm } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { getCurrentUser } = useContext(GlobalContext);
-  const { errors, setErrors } = useContext(GlobalContext);
+
+  // States
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [input, setInput] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const [form, setForm] = useState('login');
+  const [errors, setErrors] = useState({});
 
   // Routing
   const navigate = useNavigate();

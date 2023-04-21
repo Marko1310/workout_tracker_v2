@@ -1,18 +1,16 @@
-const jwt = require("jsonwebtoken");
-const pool = require("../databse/db");
+const jwt = require('jsonwebtoken');
+const pool = require('../databse/db');
 
 // get JWT token from the request and check is it is valid
 const requiresAuth = async (req, res, next) => {
-  const token = req.cookies["access-token"];
+  const token = req.cookies['access-token'];
   let isAuthorized = false;
 
   if (token) {
     try {
       const { userId } = jwt.verify(token, process.env.JWT_SECRET);
       try {
-        const user = await pool.query("SELECT * FROM users WHERE id = $1", [
-          userId,
-        ]);
+        const user = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
 
         if (user.rows.length !== 0) {
           const userCredentials = {
@@ -34,7 +32,7 @@ const requiresAuth = async (req, res, next) => {
     return next();
   }
 
-  return res.status(401).send("Unathorized");
+  return res.status(401).send('Unathorized');
 };
 
 module.exports = requiresAuth;

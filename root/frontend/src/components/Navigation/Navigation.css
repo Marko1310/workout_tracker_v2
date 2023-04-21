@@ -1,7 +1,7 @@
 .navigation-container {
   height: 5rem;
   width: 100%;
-  background: linear-gradient(90deg, #1ed875 0%, #080909 100%);
+  background: #3f3f3f;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   display: flex;
   justify-content: space-between;
@@ -19,12 +19,13 @@
 
 .navigation-logo {
   height: 100%;
+  background-color: #fff;
 }
 
 .navigation-user {
-  font-weight: 600;
+  font-weight: 400;
   font-size: large;
-  color: var(--clr-grey-3);
+  color: #fff;
 }
 
 .links {

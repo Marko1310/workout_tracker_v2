@@ -19,12 +19,13 @@ import { GlobalContext } from './context/GlobalContext';
 
 function App() {
   const { loading } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
 
   return (
     <Router>
       <div className="App">
         <div className="content">
-          {/* {<Navigation />} */}
+          {user && <Navigation />}
           {loading ? (
             <div className="loading">
               <ThreeDots

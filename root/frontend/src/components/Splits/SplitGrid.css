@@ -35,7 +35,6 @@
   padding: 1rem;
   flex-direction: column;
   align-items: center;
-  background-color: aliceblue;
   width: 100%;
   height: auto;
   border-style: solid;
@@ -43,13 +42,14 @@
   font-size: large;
   border-style: solid;
   border-color: white;
-  border-radius: 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
-  transition: 0.5s;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+  transition: 0.2s;
 }
 
 .workout-container:hover {
-  scale: 1.05;
+  cursor: pointer;
+  scale: 1.02;
 }
 
 .image-and-delete-container {
@@ -79,12 +79,12 @@
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .delete-split:hover {
-  scale: 1.05;
-  filter: brightness(1.05);
+  filter: brightness(1.1);
+  cursor: pointer;
 }
 
 .workout-card {

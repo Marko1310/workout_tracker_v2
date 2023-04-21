@@ -1,30 +1,23 @@
-import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import axios from 'axios';
+import React, { createContext, useEffect, useState } from 'react';
 
 //create context
 export const GlobalContext = createContext();
 
 // const API_URL = "https://workouttracker-server.onrender.com";
-const API_URL = "http://localhost:8000";
+const API_URL = 'http://localhost:8000';
 
 //provider component
 export const GlobalProvider = (props) => {
-  const [form, setForm] = useState("login");
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
   const [prevTrackData, setPrevTrackData] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
   const [user, setUser] = useState(null);
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     getCurrentUser();
@@ -133,12 +126,9 @@ export const GlobalProvider = (props) => {
 
   const getPrevTrackData = (workout_id) => {
     axios
-      .get(
-        `${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .get(`${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`, {
+        withCredentials: true,
+      })
       .then((data) => {
         console.log(data.data);
         setPrevTrackData(data.data);
@@ -153,12 +143,9 @@ export const GlobalProvider = (props) => {
 
   const getCurrentTrackData = (workout_id) => {
     axios
-      .get(
-        `${API_URL}/api/auth/splits/workouts/exercises/currentData/${workout_id}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .get(`${API_URL}/api/auth/splits/workouts/exercises/currentData/${workout_id}`, {
+        withCredentials: true,
+      })
       .then((data) => {
         const newArray = [];
         data.data.map((el) => {
@@ -179,11 +166,7 @@ export const GlobalProvider = (props) => {
   const addSplit = (e, title, days) => {
     e.preventDefault();
     axios
-      .post(
-        `${API_URL}/api/auth/split/new`,
-        { title, days },
-        { withCredentials: true }
-      )
+      .post(`${API_URL}/api/auth/split/new`, { title, days }, { withCredentials: true })
       .then((data) => {
         if (data) {
           setIsModalOpen(false);
@@ -198,11 +181,7 @@ export const GlobalProvider = (props) => {
 
   const addWorkout = (e, title, split_id) => {
     axios
-      .post(
-        `${API_URL}/api/auth/split/workout/new`,
-        { title, split_id },
-        { withCredentials: true }
-      )
+      .post(`${API_URL}/api/auth/split/workout/new`, { title, split_id }, { withCredentials: true })
       .then(() => {
         getWorkouts(split_id);
         setIsModalOpen(false);
@@ -219,7 +198,7 @@ export const GlobalProvider = (props) => {
       .post(
         `${API_URL}/api/auth/split/workout/exercise/new`,
         { title, goal_sets, goal_reps, workout_id },
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then(() => {
         setIsModalOpen(false);
@@ -236,7 +215,7 @@ export const GlobalProvider = (props) => {
       .post(
         `${API_URL}/api/auth/split/workout/exercise/set/new`,
         { exercise_id, workout_id, day },
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then((data) => {
         getPrevTrackData(workout_id);
@@ -253,7 +232,7 @@ export const GlobalProvider = (props) => {
       const response = axios.post(
         `${API_URL}/api/auth/split/workout/exercise/track`,
         { workout_id, currentTrackData },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       getPrevTrackData(workout_id);
 
@@ -266,11 +245,7 @@ export const GlobalProvider = (props) => {
 
   const updateWorkoutDay = (workout_id) => {
     axios
-      .post(
-        `${API_URL}/api/auth/split/workout/editDay`,
-        { workout_id },
-        { withCredentials: true }
-      )
+      .post(`${API_URL}/api/auth/split/workout/editDay`, { workout_id }, { withCredentials: true })
       .then((data) => {
         console.log(data);
       })
@@ -284,11 +259,11 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
 
     fetch(`${API_URL}/api/auth/split/delete`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
+      method: 'DELETE',
+      credentials: 'include', // include cookies in the request
       body: JSON.stringify({ split_id: split_id }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(() => {
@@ -304,11 +279,11 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
 
     fetch(`${API_URL}/api/auth/split/workout/delete`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
+      method: 'DELETE',
+      credentials: 'include', // include cookies in the request
       body: JSON.stringify({ split_id: split_id, workout_id: workout_id }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(() => {
@@ -324,22 +299,20 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
 
     fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
+      method: 'DELETE',
+      credentials: 'include', // include cookies in the request
       body: JSON.stringify({
         workout_id: workout_id,
         exercise_id: exercise_id,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
       .then((data) => {
         getPrevTrackData(workout_id);
-        const newArray = currentTrackData.filter(
-          (el) => el.exercise_id !== data[0].exercise_id
-        );
+        const newArray = currentTrackData.filter((el) => el.exercise_id !== data[0].exercise_id);
         setCurrentTrackData(newArray);
       })
       .catch((error) => {
@@ -352,22 +325,20 @@ export const GlobalProvider = (props) => {
     e.preventDefault();
 
     fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
+      method: 'DELETE',
+      credentials: 'include', // include cookies in the request
       body: JSON.stringify({
         workout_id: workout_id,
         exercise_id: exercise_id,
         track_id: track_id,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        const newArray = currentTrackData.filter(
-          (el) => el.track_id !== data[0].track_id
-        );
+        const newArray = currentTrackData.filter((el) => el.track_id !== data[0].track_id);
         setCurrentTrackData(newArray);
         getPrevTrackData(workout_id);
       })
@@ -413,17 +384,7 @@ export const GlobalProvider = (props) => {
     currentTrackData,
     updateWorkoutDay,
     timeout,
-    errors,
-    setErrors,
-    form,
-    setForm,
-    input,
-    setInput,
   };
 
-  return (
-    <GlobalContext.Provider value={globalState}>
-      {props.children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={globalState}>{props.children}</GlobalContext.Provider>;
 };
