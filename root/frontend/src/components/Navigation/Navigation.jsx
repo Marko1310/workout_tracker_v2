@@ -1,15 +1,13 @@
 //React
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { NavLink } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 //css
-import "./Navigation.css";
-
-// Images
-import logo from "../../images/workout-icon.jpg";
+import './Navigation.css';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 const Navigation = () => {
   // Context
@@ -17,26 +15,35 @@ const Navigation = () => {
   const { logout } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
 
+  // current location
+  const location = useLocation();
+  const currentRoute = location.pathname;
+  console.log(currentRoute);
+
   const handleLogout = (e) => {
     e.preventDefault();
     setLoadingTimeout();
     logout();
   };
 
+  const [navigationTitle, setNavigationTitle] = useState('');
+
+  useEffect(() => {
+    if (currentRoute.includes('dashboard')) setNavigationTitle('Dashboard');
+    else if (currentRoute.includes('workouts')) setNavigationTitle('Workouts');
+    else if (currentRoute.includes('workout')) setNavigationTitle('Workout');
+  }, [currentRoute]);
+
   return (
     <div className="navigation-container">
-      <div className="user">
-        <img className="navigation-logo" src={logo} alt="Logo" />
-        {user && <div className="navigation-user">Hello {user.name}</div>}
+      <div className="navigation">{navigationTitle}</div>
+      <div className="links">
+        <p className="navigation-user">{user.email}</p>
+        <NavLink to="/dashboard">Home</NavLink>
+        <NavLink onClick={(e) => handleLogout(e)} to="/">
+          Logout
+        </NavLink>
       </div>
-      {user && (
-        <div className="links">
-          <NavLink to="/dashboard">Home</NavLink>
-          <NavLink onClick={(e) => handleLogout(e)} to="/">
-            Logout
-          </NavLink>
-        </div>
-      )}
     </div>
   );
 };

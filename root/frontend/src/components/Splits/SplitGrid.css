@@ -12,13 +12,14 @@
   justify-content: center;
 }
 
-.choose {
-  font-weight: 600;
-  font-size: 1.5rem;
+.choose-title {
+  font-weight: 400;
+  font-size: 1.3rem;
   display: flex;
-  justify-content: center;
-  text-decoration: underline;
-  color: #fff;
+  justify-content: start;
+  padding-left: 1rem;
+  text-transform: uppercase;
+  color: black;
 }
 
 .workout-grid {
@@ -27,7 +28,7 @@
   margin-bottom: 3rem;
   display: grid;
   gap: 3rem;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
 .workout-container {
@@ -48,7 +49,6 @@
 }
 
 .workout-container:hover {
-  cursor: pointer;
   scale: 1.02;
 }
 
@@ -68,22 +68,33 @@
   position: absolute;
   right: 0rem;
   top: 0rem;
+  font-size: 1rem;
+  color: #871c12;
+  font-weight: 600;
+  transition: all 0.4s;
+}
+
+.delete-split:hover {
+  color: #d42c1d;
+  cursor: pointer;
+}
+
+.enter-split {
   height: 2rem;
-  width: 5rem;
+  width: 12rem;
   font-size: 1rem;
   color: #fff;
   padding: 0rem 0.5rem 0rem 0.5rem;
   border-radius: 3px;
   font-weight: 600;
-  background-color: #d42c1d;
+  background-color: rgb(16, 172, 224);
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: 'Montserrat', sans-serif;
+  margin-top: 1rem;
 }
 
-.delete-split:hover {
-  filter: brightness(1.1);
+.enter-split:hover {
   cursor: pointer;
 }
 
@@ -92,11 +103,21 @@
   flex-direction: column;
   list-style-type: none;
   margin-top: 10px;
+  /* align-self: flex-start;
+  margin-left: 2rem; */
 }
 
 .workout-card-title {
-  font-weight: 800;
+  text-transform: uppercase;
+  font-weight: 500;
   font-size: large;
   margin-bottom: 10px;
   align-self: center;
+}
+
+.workout-card-workouts-days {
+}
+
+.workout-card-workouts {
+  padding-left: 1rem;
 }
