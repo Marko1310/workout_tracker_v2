@@ -1,11 +1,12 @@
 // React
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 // Components
 import NewWorkoutModal from './NewWorkoutModal.jsx';
 import AddWorkoutBtn from './AddWorkoutBtn.jsx';
+import HelpModal from '../HelpModal/HelpModal';
 
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
@@ -26,6 +27,10 @@ const WorkoutGrid = () => {
   const { getCurrentWorkout } = useContext(GlobalContext);
   const { getCurrentTrackData } = useContext(GlobalContext);
 
+  // state
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
+
+  // navigate
   const navigate = useNavigate();
 
   // extract split_id
@@ -37,7 +42,13 @@ const WorkoutGrid = () => {
     } else {
       getWorkouts(split_id);
     }
-  }, []);
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (workouts.length === 0) {
+      setHelpModalOpen(true);
+    } else setHelpModalOpen(false);
+  }, [workouts]);
 
   // When card clicked -> change route:
   // 1. get current workout
@@ -62,41 +73,45 @@ const WorkoutGrid = () => {
 
   return (
     <>
-      <div className="workoutGrid-main-container">
-        <div className={`${isModalOpen ? 'blurred' : ''}`}>
-          <p className="choose-title">Choose a Workout</p>
-          <div className="exercise-grid">
-            {workouts.map((el) => {
-              return (
-                <ul key={el.workout_id} className="exercise-list-container">
-                  <div className="image-and-delete-container-workout">
-                    <img className="exercise-image" src={logo} alt="exercise"></img>
-                    <p onClick={(e) => handleDelete(e, split_id, el.workout_id)} className="delete-split">
-                      Delete
-                    </p>
-                  </div>
+      {helpModalOpen ? (
+        <HelpModal message={'workouts'} />
+      ) : (
+        <div className="workoutGrid-main-container">
+          <div className={`${isModalOpen ? 'blurred' : ''}`}>
+            <p className="choose-title">Choose a Workout:</p>
+            <div className="exercise-grid">
+              {workouts.map((el) => {
+                return (
+                  <ul key={el.workout_id} className="exercise-list-container">
+                    <div className="image-and-delete-container-workout">
+                      <img className="exercise-image" src={logo} alt="exercise"></img>
+                      <p onClick={(e) => handleDelete(e, split_id, el.workout_id)} className="delete-split">
+                        Delete
+                      </p>
+                    </div>
 
-                  <div className="exercise-card">
-                    <li className="exercise-card-title">{el.workout_name}</li>
-                    <p>Exercises: </p>
-                    {el.array_agg.map((name, index) => {
-                      return (
-                        <li>
-                          {' '}
-                          - Exercise {index + 1} : {name}
-                        </li>
-                      );
-                    })}
-                  </div>
-                  <button className="enter-workout" onClick={() => changeRoute(el.workout_id)}>
-                    Choose Workout
-                  </button>
-                </ul>
-              );
-            })}
+                    <div className="exercise-card">
+                      <li className="exercise-card-title">{el.workout_name}</li>
+                      <p>Exercises: </p>
+                      {el.array_agg.map((name, index) => {
+                        return (
+                          <li>
+                            {' '}
+                            - Exercise {index + 1} : {name}
+                          </li>
+                        );
+                      })}
+                    </div>
+                    <button className="enter-workout" onClick={() => changeRoute(el.workout_id)}>
+                      Choose Workout
+                    </button>
+                  </ul>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="new-workout-add-container">
         <NewWorkoutModal />
         <AddWorkoutBtn />

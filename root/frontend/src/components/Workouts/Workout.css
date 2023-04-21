@@ -8,15 +8,16 @@
 }
 
 .workout {
-  background-color: white;
   border-radius: 10px;
   width: 25rem;
   padding: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: 0.2s;
+  background-color: #ffff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
   margin-bottom: 3rem;
   height: auto;
   padding-top: 1rem;
@@ -40,8 +41,8 @@
   border-bottom-style: solid;
 }
 
-p {
-  color: black;
+.description-container-title {
+  margin-bottom: 1rem;
 }
 
 .button-container {
@@ -67,7 +68,7 @@ p {
   border: none;
   transition: all 0.4s;
   margin-bottom: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .add {
@@ -84,7 +85,7 @@ p {
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   height: 1.8rem;
 }
 

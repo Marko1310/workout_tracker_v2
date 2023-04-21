@@ -1,9 +1,10 @@
 // React
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // Components
 import AddSplitBtn from './AddSplitBtn';
 import NewSplit from './NewSplitModal.jsx';
+import HelpModal from '../HelpModal/HelpModal';
 
 // Components
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +27,10 @@ const WorkoutSplitGrid = () => {
   const { deleteSplit } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
 
+  // state
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
+
+  // navigate
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +39,12 @@ const WorkoutSplitGrid = () => {
     }
     getSplits();
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (splits.length === 0) {
+      setHelpModalOpen(true);
+    } else setHelpModalOpen(false);
+  }, [splits]);
 
   const changeRoute = (id) => {
     getWorkouts(id);
@@ -50,40 +61,44 @@ const WorkoutSplitGrid = () => {
 
   return (
     <>
-      <div className="main-container">
-        <div className={`${isModalOpen ? 'blurred' : ''}`}>
-          <p className="choose-title">Choose your Workout Split:</p>
-          <div className="workout-grid">
-            {splits.length > 0 &&
-              splits.map((el) => {
-                return (
-                  <ul key={el.split_id} className="workout-container">
-                    <div className="image-and-delete-container">
-                      <img className="workout-image" src={calendar} alt="Workout"></img>
-                      <p onClick={(e) => handleDelete(e, el.split_id)} className="delete-split">
-                        Delete
-                      </p>
-                    </div>
-                    <div className="workout-card">
-                      <li className="workout-card-title">{el.split_name} workout</li>
-                      <li className="workout-card-workouts-days">{el.days} day split:</li>
-                      {el.array_agg.map((name, index) => {
-                        return (
-                          <li className="workout-card-workouts">
-                            - Day {index + 1} : {name} day
-                          </li>
-                        );
-                      })}
-                    </div>
-                    <button className="enter-split" onClick={() => changeRoute(el.split_id)}>
-                      Choose Split
-                    </button>
-                  </ul>
-                );
-              })}
+      {helpModalOpen ? (
+        <HelpModal message={'splits'} />
+      ) : (
+        <div className="main-container">
+          <div className={`${isModalOpen ? 'blurred' : ''}`}>
+            <p className="choose-title">Choose your Workout Split:</p>
+            <div className="workout-grid">
+              {splits.length > 0 &&
+                splits.map((el) => {
+                  return (
+                    <ul key={el.split_id} className="workout-container">
+                      <div className="image-and-delete-container">
+                        <img className="workout-image" src={calendar} alt="Workout"></img>
+                        <p onClick={(e) => handleDelete(e, el.split_id)} className="delete-split">
+                          Delete
+                        </p>
+                      </div>
+                      <div className="workout-card">
+                        <li className="workout-card-title">{el.split_name} workout</li>
+                        <li className="workout-card-workouts-days">{el.days} day split:</li>
+                        {el.array_agg.map((name, index) => {
+                          return (
+                            <li className="workout-card-workouts">
+                              - Day {index + 1} : {name} day
+                            </li>
+                          );
+                        })}
+                      </div>
+                      <button className="enter-split" onClick={() => changeRoute(el.split_id)}>
+                        Choose Split
+                      </button>
+                    </ul>
+                  );
+                })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="new-split-add-container">
         <NewSplit />
         <AddSplitBtn />

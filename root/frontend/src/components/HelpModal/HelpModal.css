@@ -1,0 +1,23 @@
+.helpModal-container {
+  width: 20rem;
+  z-index: 2;
+  background-color: white;
+  padding: 1.5rem;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  transition: opacity 0.8s ease;
+  margin-bottom: 2rem;
+}
+
+.helpModal-title {
+  font-size: large;
+  font-weight: 500;
+}
+
+.helpModal-text {
+  font-weight: 200;
+}
