@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Exercise from './Exercise';
 import NewExerciseModal from './NewExerciseModal';
 import Message from './Message';
+import Timer from '../Timer/Timer';
 
 // css
 import './Workout.css';
@@ -74,7 +75,7 @@ const WorkoutSplit = () => {
           <div className="description-container">
             <p className="description-container-title">{currentWorkout.workout_name} day</p>
             <p className="description-container-title">{`Workout #${currentWorkout.day}`}</p>
-            {/* <Timer /> */}
+            <Timer />
             {/* <button className="buttonFinish">Finish</button> */}
             {/* <div>Notes</div> */}
           </div>

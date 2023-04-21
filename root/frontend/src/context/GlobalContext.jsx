@@ -130,7 +130,6 @@ export const GlobalProvider = (props) => {
         withCredentials: true,
       })
       .then((data) => {
-        console.log(data.data);
         setPrevTrackData(data.data);
         clearTimeout(timeout);
         setLoading(false);
@@ -151,7 +150,6 @@ export const GlobalProvider = (props) => {
         data.data.map((el) => {
           el.trackdata.map((data) => newArray.push(data));
         });
-        console.log(newArray);
         setCurrentTrackData(newArray);
         clearTimeout(timeout);
         setLoading(false);

@@ -18,7 +18,6 @@ const Navigation = () => {
   // current location
   const location = useLocation();
   const currentRoute = location.pathname;
-  console.log(currentRoute);
 
   const handleLogout = (e) => {
     e.preventDefault();
