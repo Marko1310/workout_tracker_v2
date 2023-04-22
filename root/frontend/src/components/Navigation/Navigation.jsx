@@ -35,7 +35,7 @@ const Navigation = () => {
   // state
   const [navigationTitle, setNavigationTitle] = useState('');
   // const [menuOpen, setMenuOpen] = useState(false);
-  const { menuOpen, setMenuOpen } = useContext(GlobalContext);
+  const { isMenuOpen, setIsMenuOpen } = useContext(GlobalContext);
 
   useEffect(() => {
     if (currentRoute.includes('dashboard')) setNavigationTitle('Dashboard');
@@ -59,9 +59,9 @@ const Navigation = () => {
         icon={faBars}
         style={{ color: '#ffffff', fontSize: '1.5rem' }}
         className="menu-bar"
-        onClick={() => setMenuOpen(true)}
+        onClick={() => setIsMenuOpen(true)}
       />
-      <Popmenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Popmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </div>
   );
 };

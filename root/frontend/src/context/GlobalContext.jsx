@@ -18,7 +18,7 @@ export const GlobalProvider = (props) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     getCurrentUser();
@@ -374,8 +374,8 @@ export const GlobalProvider = (props) => {
     deleteSet,
     isModalOpen,
     setIsModalOpen,
-    menuOpen,
-    setMenuOpen,
+    isMenuOpen,
+    setIsMenuOpen,
     setLoading,
     error,
     setError,

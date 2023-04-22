@@ -19,7 +19,7 @@ import './SplitGrid.css';
 import calendar from '../../images/calendar.png';
 
 const WorkoutSplitGrid = () => {
-  const { isModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { splits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
@@ -65,7 +65,7 @@ const WorkoutSplitGrid = () => {
         <HelpModal message={'splits'} />
       ) : (
         <div className="main-container">
-          <div className={`${isModalOpen ? 'blurred' : ''}`}>
+          <div className={`${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
             <p className="choose-title">Choose your Workout Split:</p>
             <div className="workout-grid">
               {splits.length > 0 &&

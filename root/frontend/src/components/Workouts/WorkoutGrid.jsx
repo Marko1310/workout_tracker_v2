@@ -18,7 +18,7 @@ import './WorkoutGrid.css';
 import logo from '../../images/workout.png';
 
 const WorkoutGrid = () => {
-  const { isModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { workouts, getWorkouts } = useContext(GlobalContext);
   const { getPrevTrackData } = useContext(GlobalContext);
@@ -77,7 +77,7 @@ const WorkoutGrid = () => {
         <HelpModal message={'workouts'} />
       ) : (
         <div className="workoutGrid-main-container">
-          <div className={`${isModalOpen ? 'blurred' : ''}`}>
+          <div className={`${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
             <p className="choose-title">Choose a Workout:</p>
             <div className="exercise-grid">
               {workouts.map((el) => {

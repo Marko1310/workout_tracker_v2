@@ -1,32 +1,27 @@
 // React
-import { useContext } from "react";
+import { useContext } from 'react';
 
 // css
-import "./AddWorkoutBtn.css";
+import './AddWorkoutBtn.css';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 // Image
-import addLogo from "../../images/plus-circle.png";
+import addLogo from '../../images/plus-circle.png';
 
 const AddWorkoutBtn = () => {
-  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
 
   const handleModal = () => {
-    setError("");
+    setError('');
     setIsModalOpen((setIsModalOpen) => !setIsModalOpen);
   };
 
   return (
-    <div className={`addNewExercise-container ${isModalOpen ? `blurred` : ""}`}>
-      <img
-        onClick={() => handleModal()}
-        className="addLogo"
-        alt="addLogo"
-        src={addLogo}
-      />
+    <div className={`addNewExercise-container ${isModalOpen || isMenuOpen ? `blurred` : ''}`}>
+      <img onClick={() => handleModal()} className="addLogo" alt="addLogo" src={addLogo} />
       <p>Add new workout</p>
     </div>
   );

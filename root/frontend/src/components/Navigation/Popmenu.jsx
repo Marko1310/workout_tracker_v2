@@ -11,16 +11,16 @@ import x from '../../images/close-button.png';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
-const Popmenu = ({ menuOpen, setMenuOpen, setIsModalOpen }) => {
+const Popmenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
   // const { menuOpen, setMenuOpen, inventory } = useContext(GlobalContext);
 
   const { user } = useContext(GlobalContext);
 
   return (
-    <div className={`popmenu ${menuOpen ? 'open' : 'close'}`}>
+    <div className={`popmenu ${isMenuOpen ? 'open' : 'close'}`}>
       <div className="x-container">
         <p className="navigation-user black">{user.email}</p>
-        <img className="x" alt="x" src={x} onClick={() => setMenuOpen(false)} />
+        <img className="x" alt="x" src={x} onClick={() => setIsMenuOpen(false)} />
       </div>
 
       <div className="popmenu-tags-container">

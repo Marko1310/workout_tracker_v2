@@ -16,7 +16,7 @@ import './Workout.css';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const WorkoutSplit = () => {
-  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
@@ -70,7 +70,7 @@ const WorkoutSplit = () => {
 
   return (
     <div className="workout-main-container">
-      <div className={`workout ${isModalOpen ? 'blurred' : ''}`}>
+      <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
         <div className="container">
           <div className="description-container">
             <p className="description-container-title">{currentWorkout.workout_name} day</p>
