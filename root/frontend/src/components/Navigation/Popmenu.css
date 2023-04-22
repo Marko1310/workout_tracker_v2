@@ -1,0 +1,50 @@
+.popmenu {
+  position: fixed;
+  top: 0;
+  /* bottom: 0; */
+  right: 0;
+  background-color: white;
+  width: 250px;
+  z-index: 10;
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.open {
+  transform: translateX(0%);
+}
+
+.close {
+  transform: translateX(100%);
+}
+
+.popmenu-tags-container {
+  margin-top: 50px;
+}
+
+.popmenu-tags {
+  height: 35px;
+  display: flex;
+  text-decoration: none;
+  margin-bottom: 10px;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 15px;
+}
+
+.popmenu-tags:hover {
+  background-color: rgba(214, 214, 214, 0.3);
+  border-radius: 4px;
+  transition: 0.3s ease-in-out;
+}
+
+.x-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.x {
+  height: 15px;
+  cursor: pointer;
+}

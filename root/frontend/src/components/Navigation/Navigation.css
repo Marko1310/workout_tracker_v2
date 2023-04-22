@@ -14,6 +14,11 @@
   font-weight: 300;
   font-size: large;
   color: #fff;
+  cursor: default;
+}
+.user-links {
+  display: flex;
+  align-items: center;
 }
 
 .navigation-user {
@@ -22,14 +27,30 @@
   color: #fff;
   margin-right: 2rem;
   font-style: italic;
+  cursor: default;
 }
 
 .links {
   display: flex;
   align-items: center;
   gap: 1rem;
+  text-decoration: underline;
 }
 
 .links a {
   color: #fff;
+}
+
+.menu-bar {
+  display: none;
+}
+
+@media all and (max-width: 768px) {
+  .menu-bar {
+    display: initial;
+  }
+
+  .user-links {
+    display: none;
+  }
 }
