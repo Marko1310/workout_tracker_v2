@@ -1,3 +1,6 @@
+//React
+import { NavLink } from 'react-router-dom';
+
 // css
 import './Popmenu.css';
 
@@ -8,22 +11,25 @@ import x from '../../images/close-button.png';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
-const Popmenu = ({ menuOpen, setMenuOpen }) => {
+const Popmenu = ({ menuOpen, setMenuOpen, setIsModalOpen }) => {
   // const { menuOpen, setMenuOpen, inventory } = useContext(GlobalContext);
+
+  const { user } = useContext(GlobalContext);
 
   return (
     <div className={`popmenu ${menuOpen ? 'open' : 'close'}`}>
       <div className="x-container">
+        <p className="navigation-user black">{user.email}</p>
         <img className="x" alt="x" src={x} onClick={() => setMenuOpen(false)} />
       </div>
+
       <div className="popmenu-tags-container">
-        {/* {inventory.map((el) => {
-          return (
-            <a className="popmenu-tags" key={el.id} href={`#${el.id}`} onClick={() => setMenuOpen(false)}>
-              {el.title}
-            </a>
-          );
-        })} */}
+        <NavLink className="popmenu-tags" to="/dashboard">
+          Home
+        </NavLink>
+        <NavLink className="popmenu-tags" onClick={(e) => handleLogout(e)} to="/">
+          Logout
+        </NavLink>
       </div>
     </div>
   );

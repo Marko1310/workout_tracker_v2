@@ -21,6 +21,17 @@ function App() {
   const { loading } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
 
+  const threeDotsProps = {
+    height: '80',
+    width: '80',
+    radius: '9',
+    color: '#000',
+    ariaLabel: 'three-dots-loading',
+    wrapperStyle: {},
+    wrapperClassName: '',
+    visible: true,
+  };
+
   return (
     <Router>
       <div className="App">
@@ -28,16 +39,7 @@ function App() {
           {user && <Navigation />}
           {loading ? (
             <div className="loading">
-              <ThreeDots
-                height="80"
-                width="80"
-                radius="9"
-                color="#fff"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
-              />
+              <ThreeDots {...threeDotsProps} />
               <h2 className="loading-title">Loading</h2>
             </div>
           ) : (
@@ -47,7 +49,6 @@ function App() {
               <Route path="workouts/:split_id" element={<WorkoutGrid />} />
               <Route path="workout/:id" element={<Workout />} />
               <Route path="*" element={<NotFound />} />
-              {/* <Route path="test" element={<Timer />} /> */}
             </Routes>
           )}
         </div>

@@ -34,7 +34,8 @@ const Navigation = () => {
 
   // state
   const [navigationTitle, setNavigationTitle] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(false);
+  const { menuOpen, setMenuOpen } = useContext(GlobalContext);
 
   useEffect(() => {
     if (currentRoute.includes('dashboard')) setNavigationTitle('Dashboard');

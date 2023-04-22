@@ -30,6 +30,10 @@
   cursor: default;
 }
 
+.black {
+  color: black;
+}
+
 .links {
   display: flex;
   align-items: center;

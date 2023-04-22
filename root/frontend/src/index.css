@@ -168,7 +168,7 @@ main {
 }
 
 .loading {
-  color: #fff;
+  color: #000;
   display: flex;
   justify-content: center;
   flex-direction: column;

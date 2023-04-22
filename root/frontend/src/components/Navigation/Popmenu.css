@@ -4,9 +4,9 @@
   /* bottom: 0; */
   right: 0;
   background-color: white;
-  width: 250px;
+  min-width: 250px;
   z-index: 10;
-  padding: 20px;
+  padding: 25px;
   transition: transform 0.2s;
 }
 
@@ -20,16 +20,21 @@
 
 .popmenu-tags-container {
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .popmenu-tags {
-  height: 35px;
   display: flex;
-  text-decoration: none;
   margin-bottom: 10px;
   align-items: center;
   cursor: pointer;
   padding-left: 15px;
+  color: black;
+  font-size: 1rem;
+  height: 40px;
+  border-bottom-style: solid;
+  border-color: rgb(198, 198, 198);
 }
 
 .popmenu-tags:hover {
@@ -40,8 +45,9 @@
 
 .x-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .x {
