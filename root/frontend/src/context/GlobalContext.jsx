@@ -1,11 +1,14 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 
 //create context
 export const GlobalContext = createContext();
 
 // const API_URL = "https://workouttracker-server.onrender.com";
-const API_URL = 'http://localhost:8000';
+// const API_URL = 'http://localhost:8000';
+
+// services
+import userServices from '../services/userServices';
 
 //provider component
 export const GlobalProvider = (props) => {
@@ -21,93 +24,96 @@ export const GlobalProvider = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    getCurrentUser();
+    userServices.getCurrentUser().then((user) => {
+      setUser(user);
+    });
   }, []);
 
-  let timeout;
-  const setLoadingTimeout = () => {
-    timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-  };
+  // let timeout;
+  // const setLoadingTimeout = () => {
+  //   timeout = setTimeout(() => {
+  //     setLoading(true);
+  //   }, 1000);
+  // };
 
   ///////////////////////////// USER ////////////////////////////
-  const getCurrentUser = () => {
-    axios
-      .get(`${API_URL}/api/auth/current`, {
-        withCredentials: true,
-      })
-      .then((user) => {
-        if (!user) {
-          setUser(null);
-        } else {
-          setUser(user.data);
-          axios
-            .get(`${API_URL}/api/auth/splits/current`, {
-              withCredentials: true,
-            })
-            .then(() => {
-              setLoading(false);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getCurrentUser = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/current`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((user) => {
+  //       if (!user) {
+  //         setUser(null);
+  //       } else {
+  //         setUser(user.data);
+  //         axios
+  //           .get(`${API_URL}/api/auth/splits/current`, {
+  //             withCredentials: true,
+  //           })
+  //           .then(() => {
+  //             setLoading(false);
+  //           })
+  //           .catch((error) => {
+  //             console.log(error);
+  //           });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  const logout = () => {
-    axios
-      .get(`${API_URL}/api/auth/logout`, {
-        withCredentials: true,
-      })
-      .then(() => {
-        setUser(null);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        clearTimeout(timeout);
-        setLoading(false);
-      });
-  };
+  // const logout = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/logout`, {
+  //       withCredentials: true,
+  //     })
+  //     .then(() => {
+  //       setUser(null);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     });
+  // };
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
-  const getSplits = () => {
-    axios
-      .get(`${API_URL}/api/auth/splits/current`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setSplits(data.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getSplits = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/current`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setSplits(data.data);
+  //       // clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const getWorkouts = (split_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setWorkouts(data.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getWorkouts = (split_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setWorkouts(data.data);
+  //       // clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       // clearTimeout(timeout);
+  //       setLoading(false);
+  //     });
+  // };
 
   const getCurrentWorkout = (workout_id) => {
     axios
@@ -350,20 +356,21 @@ export const GlobalProvider = (props) => {
   const globalState = {
     user,
     setUser,
-    setLoadingTimeout,
+    // setLoadingTimeout,
     splits,
     setSplits,
     workouts,
     setWorkouts,
     prevTrackData,
-    getCurrentUser,
-    logout,
-    getSplits,
-    getWorkouts,
+    // getCurrentUser,
+    // logout,
+    // getSplits,
+    // getWorkouts,
     getCurrentWorkout,
     getCurrentTrackData,
     getPrevTrackData,
     loading,
+    setLoading,
     addSplit,
     addWorkout,
     addExercise,
@@ -376,7 +383,6 @@ export const GlobalProvider = (props) => {
     setIsModalOpen,
     isMenuOpen,
     setIsMenuOpen,
-    setLoading,
     error,
     setError,
     currentWorkout,
@@ -384,7 +390,7 @@ export const GlobalProvider = (props) => {
     setCurrentTrackData,
     currentTrackData,
     updateWorkoutDay,
-    timeout,
+    // timeout,
   };
 
   return <GlobalContext.Provider value={globalState}>{props.children}</GlobalContext.Provider>;

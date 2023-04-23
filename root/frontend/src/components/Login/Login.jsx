@@ -15,13 +15,15 @@ import { GlobalContext } from '../../context/GlobalContext';
 // const API_URL = "https://workouttracker-server.onrender.com";
 const API_URL = 'http://localhost:8000';
 
+import Loading from '../Loading/Loading';
+
 // images
 import logo from '../../images/workout-icon.jpg';
 
 function Login() {
   // Global context
   const { user } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
+  const { loading, setLoading } = useContext(GlobalContext);
   const { getCurrentUser } = useContext(GlobalContext);
 
   // States
@@ -38,21 +40,25 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && navigate) {
+    setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+
+    if (user) {
+      console.log(user);
+      setLoading(false);
       navigate('/dashboard');
     }
   }, [user, navigate]);
 
-  useEffect(() => {
-    setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
-  }, []);
-
-  let timeout;
-  const setLoadingTimeout = () => {
-    timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-  };
+  // let timeout;
+  // const setLoadingTimeout = () => {
+  //   timeout = setTimeout(() => {
+  //     setLoading(true);
+  //   }, 1000);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +94,9 @@ function Login() {
       });
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="login-container">
       <div className="image-container">
         <img

@@ -17,10 +17,13 @@ import './WorkoutGrid.css';
 // Image
 import logo from '../../images/workout.png';
 
+// services
+import workoutServices from '../../services/workoutServices.js';
+
 const WorkoutGrid = () => {
   const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { workouts, getWorkouts } = useContext(GlobalContext);
+  const { workouts, setWorkouts } = useContext(GlobalContext);
   const { getPrevTrackData } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
@@ -37,10 +40,22 @@ const WorkoutGrid = () => {
   const { split_id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
+    console.log('Component mounted');
     if (!user && navigate) {
       navigate('/');
     } else {
-      getWorkouts(split_id);
+      workoutServices
+        .getWorkouts(split_id)
+        .then((workouts) => {
+          console.log('woirjouts mounted');
+          setLoading(false);
+          setWorkouts(workouts);
+        })
+        .catch((error) => {
+          console.error(error);
+          setLoading(false);
+        });
     }
   }, [user, navigate]);
 

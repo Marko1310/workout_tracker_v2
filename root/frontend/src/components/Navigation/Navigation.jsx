@@ -21,6 +21,7 @@ const Navigation = () => {
   const { user } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
+  const { splits } = useContext(GlobalContext);
 
   // current location
   const location = useLocation();

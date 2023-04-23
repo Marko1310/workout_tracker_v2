@@ -18,14 +18,18 @@ import './SplitGrid.css';
 // image
 import calendar from '../../images/calendar.png';
 
+// services
+import splitServices from '../../services/splitServices';
+import workoutServices from '../../services/workoutServices';
+
 const WorkoutSplitGrid = () => {
-  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen, setIsModalOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { splits } = useContext(GlobalContext);
-  const { getWorkouts } = useContext(GlobalContext);
-  const { getSplits } = useContext(GlobalContext);
+  const { splits, setSplits } = useContext(GlobalContext);
+  // const { getWorkouts } = useContext(GlobalContext);
+  // const { getSplits } = useContext(GlobalContext);
   const { deleteSplit } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
+  const { setLoadingTimeout, setLoading } = useContext(GlobalContext);
 
   // state
   const [helpModalOpen, setHelpModalOpen] = useState(false);
@@ -37,7 +41,9 @@ const WorkoutSplitGrid = () => {
     if (!user) {
       navigate('/');
     }
-    getSplits();
+    splitServices.getSplits().then((splits) => {
+      setSplits(splits);
+    });
   }, [user, navigate]);
 
   useEffect(() => {
@@ -47,8 +53,11 @@ const WorkoutSplitGrid = () => {
   }, [splits]);
 
   const changeRoute = (id) => {
-    getWorkouts(id);
+    // workoutServices.getWorkouts(id).then(() => {
+    //   setLoading(false);
+    // });
     navigate(`/workouts/${id}`);
+    // setLoading(true);
   };
 
   const handleDelete = (e, split_id) => {
