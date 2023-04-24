@@ -22,7 +22,7 @@ const HelpModal = ({ message }) => {
 
   return (
     <div className="helpModal-container">
-      {message === 'splits' && <p className="helpModal-title">Hello {user.name}!</p>}
+      {message === 'splits' && <p className="helpModal-title">Hello !</p>}
       <br />
       <p className="helpModal-text">
         It looks like you still don't have any {text}.

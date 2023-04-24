@@ -39,11 +39,13 @@ const WorkoutSplitGrid = () => {
 
   useEffect(() => {
     if (!user) {
+      console.log('aaa');
       navigate('/');
     }
-    splitServices.getSplits().then((splits) => {
-      setSplits(splits);
-    });
+    // splitServices.getSplits().then((splits) => {
+    //   setSplits(splits);
+    // });
+    // getSplits();
   }, [user, navigate]);
 
   useEffect(() => {

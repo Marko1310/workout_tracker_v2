@@ -1,7 +1,8 @@
 // React
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+// const API_URL = 'http://localhost:8000';
 
 // images
 import { images } from './images';
@@ -12,19 +13,21 @@ import './Login.css';
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
 
-// const API_URL = "https://workouttracker-server.onrender.com";
-const API_URL = 'http://localhost:8000';
-
 import Loading from '../Loading/Loading';
 
 // images
 import logo from '../../images/workout-icon.jpg';
 
+// services
+import loginServices from '../../services/loginServices';
+import signupServices from '../../services/signupServices';
+import userServices from '../../services/userServices';
+
 function Login() {
   // Global context
-  const { user } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
-  const { getCurrentUser } = useContext(GlobalContext);
+  // const { getCurrentUser } = useContext(GlobalContext);
 
   // States
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -44,54 +47,101 @@ function Login() {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-
-    if (user) {
-      console.log(user);
-      setLoading(false);
+    // setLoading(true);
+    if (user && navigate) {
+      // setLoading(false);
       navigate('/dashboard');
     }
+    // setLoading(false);
   }, [user, navigate]);
 
-  // let timeout;
-  // const setLoadingTimeout = () => {
-  //   timeout = setTimeout(() => {
-  //     setLoading(true);
-  //   }, 1000);
-  // };
+  let timeout;
+  const setLoadingTimeout = () => {
+    timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
+    // setLoadingTimeout();
     let data = {};
 
-    if (form === 'signup') {
+    // if (form === 'signup') {
+    //   data = {
+    //     name: input.name,
+    //     email: input.email,
+    //     password: input.password,
+    //   };
+
+    //   signupServices
+    //     .signup(data)
+    //     .then(() => {
+    //       getCurrentUser();
+    //       clearTimeout(timeout);
+    //       setLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       setErrors(error.response.data);
+    //       clearTimeout(timeout);
+    //       setLoading(false);
+    //     });
+    // }
+
+    if (form === 'login') {
       data = {
-        name: input.name,
         email: input.email,
         password: input.password,
       };
-    } else {
-      data = {
-        email: input.email,
-        password: input.password,
-      };
+      loginServices
+        .login(data)
+        .then((response) => {
+          console.log(response);
+          setUser(response.data.user);
+          // userServices.getCurrentUser().then((data) => {
+          //   console.log(data);
+          //   if (!user) {
+          //     setUser(null);
+          //   } else {
+          //     setUser(user);
+          //     // axios
+          //     //   .get(`${API_URL}/api/auth/splits/current`, {
+          //     //     withCredentials: true,
+          //     //   })
+          //     //   .then(() => {
+          //     //     setLoading(false);
+          //     //   })
+          //     //   .catch((error) => {
+          //     //     console.log(error);
+          //     //   });
+          //   }
+          // });
+          // clearTimeout(timeout);
+          // setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setErrors(error.response.data);
+          clearTimeout(timeout);
+          setLoading(false);
+        });
     }
-    axios
-      .post(form === 'signup' ? `${API_URL}/api/auth/register` : `${API_URL}/api/auth/login`, data, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        getCurrentUser();
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrors(error.response.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      });
+    // axios
+    //   .post(form === 'signup' ? `${API_URL}/api/auth/register` : `${API_URL}/api/auth/login`, data, {
+    //     withCredentials: true,
+    //   })
+    //   .then(() => {
+    //     getCurrentUser();
+    //     clearTimeout(timeout);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setErrors(error.response.data);
+    //     clearTimeout(timeout);
+    //     setLoading(false);
+    //   });
   };
 
   return loading ? (

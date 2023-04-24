@@ -49,10 +49,10 @@ router.post('/register', async (req, res) => {
 
     res.cookie('access-token', token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      // httpOnly: true,
-      // secure: true,
-      // sameSite: "none",
-      // domain: "onrender.com",
+      // httpOnly: false,
+      secure: false,
+      // sameSite: 'none',
+      // // domain: "onrender.com",
     });
 
     const userCredentials = {
@@ -91,12 +91,17 @@ router.post('/login', async (req, res) => {
       expiresIn: '7d',
     });
 
+    console.log(token);
+
     res.cookie('access-token', token, {
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-      // secure: true,
-      sameSite: 'none',
-      // domain: "onrender.com",
+      // expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      // // httpOnly: false,
+      // secure: false,
+      // // sameSite: 'none',
+      // // domain: "onrender.com",
+      httpOnly: true, // cookie cannot be accessed via client-side JavaScript
+      secure: true, // cookie can only be transmitted over HTTPS
+      sameSite: 'strict',
     });
 
     // return everything except the password
@@ -105,6 +110,8 @@ router.post('/login', async (req, res) => {
       name: user.rows[0].name,
       email: user.rows[0].email,
     };
+
+    console.log(userCredentials);
     res.json({ user: userCredentials, token: token });
   } catch (err) {
     res.status(500).send(err.message);
@@ -126,6 +133,8 @@ router.get('/current', requiresAuth, (req, res) => {
 // @access  Private
 router.get('/logout', requiresAuth, async (req, res) => {
   try {
+    console.log('cleared');
+
     res.clearCookie('access-token');
     return res.json({ success: true });
   } catch (err) {

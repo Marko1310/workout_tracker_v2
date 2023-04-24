@@ -16,11 +16,14 @@ import { GlobalContext } from '../../context/GlobalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+// services
+import userServices from '../../services/userServices';
+
 const Navigation = () => {
   // Context
-  const { user } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
+  const { setLoadingTimeout, timeout, setLoading } = useContext(GlobalContext);
   const { splits } = useContext(GlobalContext);
 
   // current location
@@ -29,8 +32,20 @@ const Navigation = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
-    logout();
+    // setLoadingTimeout();
+    userServices
+      .logout()
+      .then(() => {
+        console.log('bbb');
+        setUser(null);
+        // clearTimeout(timeout);
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        // clearTimeout(timeout);
+        // setLoading(false);
+      });
   };
 
   // state
@@ -62,7 +77,7 @@ const Navigation = () => {
         className="menu-bar"
         onClick={() => setIsMenuOpen(true)}
       />
-      <Popmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Popmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} handleLogout={handleLogout} />
     </div>
   );
 };

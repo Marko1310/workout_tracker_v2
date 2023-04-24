@@ -11,7 +11,7 @@ import x from '../../images/close-button.png';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
-const Popmenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
+const Popmenu = ({ isMenuOpen, setIsMenuOpen, handleLogout }) => {
   // const { menuOpen, setMenuOpen, inventory } = useContext(GlobalContext);
 
   const { user } = useContext(GlobalContext);

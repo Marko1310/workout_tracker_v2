@@ -7,29 +7,18 @@ const getCurrentUser = () => {
     .get(`${API_URL}/api/auth/current`, {
       withCredentials: true,
     })
-    .then((user) => {
-      return user.data;
+    .then((data) => {
+      return data;
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-const logout = () => {
-  axios
-    .get(`${API_URL}/api/auth/logout`, {
-      withCredentials: true,
-    })
-    .then(() => {
-      setUser(null);
-      clearTimeout(timeout);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.log(error);
-      clearTimeout(timeout);
-      setLoading(false);
-    });
+const logout = async () => {
+  return axios.get(`${API_URL}/api/auth/logout`, {
+    withCredentials: true,
+  });
 };
 
 export default {

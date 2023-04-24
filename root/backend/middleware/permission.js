@@ -7,6 +7,7 @@ const requiresAuth = async (req, res, next) => {
   let isAuthorized = false;
 
   if (token) {
+    console.log(token);
     try {
       const { userId } = jwt.verify(token, process.env.JWT_SECRET);
       try {
